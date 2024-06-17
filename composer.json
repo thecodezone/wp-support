@@ -1,0 +1,47 @@
+{
+  "name": "codezone/dt",
+  "description": "Support utilities for building DT plugins.",
+  "type": "library",
+  "license": "GNU",
+  "autoload": {
+    "psr-4": {
+      "CodeZone\\DT\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Craig Wann",
+      "email": "craig@codezone.io"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+    "league/route": "^5.1",
+    "league/container": "4.*",
+    "guzzlehttp/psr7": "^2.6",
+    "kucrut/vite-for-wp": "^0.8.0",
+    "league/plates": "^3.5",
+    "league/config": "^1.2"
+  },
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+    "php-parallel-lint/php-parallel-lint": "^1.3.1",
+    "phpcompatibility/php-compatibility": "^9.0",
+    "yoast/phpunit-polyfills": "^1.0",
+    "brain/monkey": "2.*"
+  },
+  "config": {
+    "platform": {
+      "php": "7.4.27"
+    },
+    "platform-check": false,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}
