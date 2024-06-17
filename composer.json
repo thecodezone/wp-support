@@ -2,7 +2,7 @@
   "name": "codezone/dt",
   "description": "Support utilities for building DT plugins.",
   "type": "library",
-  "license": "GNU",
+  "license": "GPL-2.0-only",
   "autoload": {
     "psr-4": {
       "CodeZone\\DT\\": "src/"
