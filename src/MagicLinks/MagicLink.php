@@ -7,7 +7,7 @@ use League\Route\Http\Exception\NotFoundException;
 use League\Route\Router;
 use CodeZone\DT\Services\RouteInterface;
 
-abstract class MagicLink extends DT_Magic_Url_Base {
+abstract class MagicLink extends \DT_Magic_Url_Base {
     private static $_instance = null;
     public $page_title = 'Magic App';
     public $page_description = 'Magic Link';
