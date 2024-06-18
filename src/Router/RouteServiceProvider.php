@@ -181,6 +181,30 @@ abstract class RouteServiceProvider extends AbstractServiceProvider implements B
     protected function resolve_file( $file ) {
         $route = $this->getContainer()->get( RouteInterface::class );
         $this->route_file( $route, $file );
+    }
+
+    /**
+     * Retrieves the file URI based on the file configuration.
+     *
+     * @param array $file The array containing file configuration.
+     * @return string The file URI.
+     */
+    protected function file_uri( $file ) {
+        $query = get_query_var( $file['query'] );
+        return '/' . trim( $query, '/' );
+    }
+
+    /**
+     * Routes a file with the given route and file configuration.
+     *
+     * @param RouteInterface $route The route to be used for routing the file.
+     * @param array $file The array containing file configuration.
+     * @return RouteInterface The updated route.
+     */
+    protected function route_file( RouteInterface $route, $file ) {
+        $route->middleware( $this->middleware() )
+            ->file( $file['file'] )
+            ->uri( $this->file_uri( $file ) );
 
         if ( WP_DEBUG ) {
             $route->dispatch();
@@ -193,32 +217,5 @@ abstract class RouteServiceProvider extends AbstractServiceProvider implements B
         }
 
         $route->resolve();
-    }
-
-    /**
-     * Retrieves the file URI based on the file configuration.
-     *
-     * @param array $file The array containing file configuration.
-     * @return string The file URI.
-     */
-    protected function file_uri($file ) {
-        $query = get_query_var( $file['query'] );
-        return '/' . trim( $query, '/' );
-    }
-
-    /**
-     * Routes a file with the given route and file configuration.
-     *
-     * @param RouteInterface $route The route to be used for routing the file.
-     * @param array $file The array containing file configuration.
-     * @return RouteInterface The updated route.
-     */
-    protected function route_file(RouteInterface $route, $file ) {
-
-        $route->middleware( $this->middleware() )
-            ->file( $file['file'] )
-            ->uri( $this->file_uri( $file ) );
-
-        return $route;
     }
 }
