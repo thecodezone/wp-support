@@ -10,6 +10,8 @@ use CodeZone\WPSupport\Cache\CacheInterface;
 use CodeZone\WPSupport\Container\ContainerFactory;
 use CodeZone\WPSupport\Options\Options;
 use CodeZone\WPSupport\Options\OptionsInterface;
+use CodeZone\WPSupport\Rewrites\Rewrites;
+use CodeZone\WPSupport\Rewrites\RewritesInterface;
 use CodeZone\WPSupport\Router\ResponseResolver;
 use CodeZone\WPSupport\Router\ResponseResolverInterface;
 use GuzzleHttp\Psr7\Response;
