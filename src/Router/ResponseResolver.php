@@ -77,7 +77,7 @@ class ResponseResolver implements ResponseResolverInterface
      * @return void
      */
     protected function resolve_redirect( ResponseInterface $response ) {
-        \wp_redirect( $response->getHeader( 'Location' )[0] );
+        wp_redirect( $response->getHeader( 'Location' )[0] );
         die();
     }
 
@@ -108,7 +108,7 @@ class ResponseResolver implements ResponseResolverInterface
      * @return void
      */
     protected function resolve_json( ResponseInterface $response ) {
-        \wp_send_json( \json_decode( $response->getBody() ) );
+        wp_send_json( json_decode( $response->getBody() ) );
     }
 
     /**
@@ -139,10 +139,10 @@ class ResponseResolver implements ResponseResolverInterface
         $is_json = $this->is_json( $response );
 
         if ( $is_json ) {
-            \wp_send_json_error( \json_decode( $response->getBody() ), $response->getStatusCode() );
+            wp_send_json_error( json_decode( $response->getBody() ), $response->getStatusCode() );
             die();
         } else {
-            \wp_die( \esc_html( $response->getBody() ), \esc_attr( $response->getStatusCode() ) );
+            wp_die( esc_html( $response->getBody() ), esc_attr( $response->getStatusCode() ) );
         }
     }
 
