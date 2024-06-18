@@ -2,12 +2,7 @@
 
 namespace CodeZone\WPSupport\Router;
 
-use CodeZone\WPSupport\Services\NoRendererException;
 use Psr\Http\Message\ResponseInterface;
-use function CodeZone\WPSupport\Services\wp_die;
-use function CodeZone\WPSupport\Services\wp_redirect;
-use function CodeZone\WPSupport\Services\wp_send_json;
-use function CodeZone\WPSupport\Services\wp_send_json_error;
 
 /**
  * Class ResponseResolver
@@ -117,8 +112,6 @@ class ResponseResolver implements ResponseResolverInterface
      * @param ResponseInterface $response The response object.
      *
      * @return void
-     *
-     * @throws NoRendererException If the renderer is not set.
      */
     protected function render_html( ResponseInterface $response ) {
         if ( $this->renderer ) {
