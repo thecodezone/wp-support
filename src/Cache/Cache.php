@@ -1,10 +1,10 @@
 <?php
 
-namespace CodeZone\PluginSupport\Cache;
+namespace CodeZone\WPSupport\Cache;
 
-use function CodeZone\PluginSupport\Services\delete_transient;
-use function CodeZone\PluginSupport\Services\get_transient;
-use function CodeZone\PluginSupport\Services\set_transient;
+use function CodeZone\WPSupport\Services\delete_transient;
+use function CodeZone\WPSupport\Services\get_transient;
+use function CodeZone\WPSupport\Services\set_transient;
 
 /**
  * Class Cache

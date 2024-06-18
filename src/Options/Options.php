@@ -1,10 +1,10 @@
 <?php
 
-namespace CodeZone\PluginSupport\Options;
+namespace CodeZone\WPSupport\Options;
 
-use function CodeZone\PluginSupport\Services\add_option;
-use function CodeZone\PluginSupport\Services\get_option;
-use function CodeZone\PluginSupport\Services\update_option;
+use function CodeZone\WPSupport\Services\add_option;
+use function CodeZone\WPSupport\Services\get_option;
+use function CodeZone\WPSupport\Services\update_option;
 
 /**
  * Class Options

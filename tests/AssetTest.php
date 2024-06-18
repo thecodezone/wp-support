@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use CodeZone\PluginSupport\Assets\AssetQueueInterface;
+use CodeZone\WPSupport\Assets\AssetQueueInterface;
 
 class AssetTest extends TestCase
 {

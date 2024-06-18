@@ -1,5 +1,5 @@
 <?php
-namespace CodeZone\PluginSupport\Cache;
+namespace CodeZone\WPSupport\Cache;
 
 interface CacheInterface {
 	public function get( string $key );

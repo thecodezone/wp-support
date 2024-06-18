@@ -1,5 +1,5 @@
 <?php
- namespace CodeZone\PluginSupport\Assets;
+ namespace CodeZone\WPSupport\Assets;
 
 interface AssetQueueInterface {
 	public function filter( array $scripts_whitelist, array $styles_whitelist );

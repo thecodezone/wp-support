@@ -3,15 +3,15 @@
 namespace Tests;
 
 use Brain\Monkey;
-use CodeZone\PluginSupport\Assets\AssetQueue;
-use CodeZone\PluginSupport\Assets\AssetQueueInterface;
-use CodeZone\PluginSupport\Cache\Cache;
-use CodeZone\PluginSupport\Cache\CacheInterface;
-use CodeZone\PluginSupport\Container\ContainerFactory;
-use CodeZone\PluginSupport\Options\Options;
-use CodeZone\PluginSupport\Options\OptionsInterface;
-use CodeZone\PluginSupport\Router\ResponseResolver;
-use CodeZone\PluginSupport\Router\ResponseResolverInterface;
+use CodeZone\WPSupport\Assets\AssetQueue;
+use CodeZone\WPSupport\Assets\AssetQueueInterface;
+use CodeZone\WPSupport\Cache\Cache;
+use CodeZone\WPSupport\Cache\CacheInterface;
+use CodeZone\WPSupport\Container\ContainerFactory;
+use CodeZone\WPSupport\Options\Options;
+use CodeZone\WPSupport\Options\OptionsInterface;
+use CodeZone\WPSupport\Router\ResponseResolver;
+use CodeZone\WPSupport\Router\ResponseResolverInterface;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;

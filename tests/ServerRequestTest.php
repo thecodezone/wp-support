@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use CodeZone\PluginSupport\Router\ServerRequestFactory;
+use CodeZone\WPSupport\Router\ServerRequestFactory;
 use Psr\Http\Message\ServerRequestInterface;
 
 class ServerRequestTest extends TestCase {

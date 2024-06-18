@@ -1,13 +1,13 @@
 <?php
 
-namespace CodeZone\PluginSupport\Router;
+namespace CodeZone\WPSupport\Router;
 
-use CodeZone\PluginSupport\Services\NoRendererException;
+use CodeZone\WPSupport\Services\NoRendererException;
 use Psr\Http\Message\ResponseInterface;
-use function CodeZone\PluginSupport\Services\wp_die;
-use function CodeZone\PluginSupport\Services\wp_redirect;
-use function CodeZone\PluginSupport\Services\wp_send_json;
-use function CodeZone\PluginSupport\Services\wp_send_json_error;
+use function CodeZone\WPSupport\Services\wp_die;
+use function CodeZone\WPSupport\Services\wp_redirect;
+use function CodeZone\WPSupport\Services\wp_send_json;
+use function CodeZone\WPSupport\Services\wp_send_json_error;
 
 /**
  * Class ResponseResolver
@@ -27,7 +27,7 @@ class ResponseResolver implements ResponseResolverInterface
     public function __construct( ResponseRendererInterface $renderer = null )
     {
         if ( $renderer ) {
-            $this->setRenderer( $renderer );
+            $this->set_renderer( $renderer );
         }
     }
 
@@ -36,7 +36,7 @@ class ResponseResolver implements ResponseResolverInterface
      *
      * @param ResponseRendererInterface $renderer The response renderer object.
      */
-    public function setRenderer( ResponseRendererInterface $renderer ) {
+    public function set_renderer(ResponseRendererInterface $renderer ) {
         $this->renderer = $renderer;
     }
 

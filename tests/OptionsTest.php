@@ -3,7 +3,7 @@
 namespace Tests;
 
 use Brain\Monkey;
-use CodeZone\PluginSupport\Options\Options;
+use CodeZone\WPSupport\Options\Options;
 
 class OptionsTest extends TestCase {
     /**

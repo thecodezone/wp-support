@@ -1,8 +1,8 @@
 <?php
 
-namespace CodeZone\PluginSupport\Router;
+namespace CodeZone\WPSupport\Router;
 
-use CodeZone\PluginSupport\Container\ContainerFactory;
+use CodeZone\WPSupport\Container\ContainerFactory;
 use Psr\Http\Message\ResponseInterface;
 
 /**

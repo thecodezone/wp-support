@@ -3,7 +3,7 @@
 namespace Tests;
 
 use Brain\Monkey;
-use CodeZone\PluginSupport\Cache\CacheInterface;
+use CodeZone\WPSupport\Cache\CacheInterface;
 
 class CacheTest extends TestCase
 {

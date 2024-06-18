@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeZone\PluginSupport\Container;
+namespace CodeZone\WPSupport\Container;
 
 use League\Container\Container;
 use League\Container\ReflectionContainer;

@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeZone\PluginSupport\Router;
+namespace CodeZone\WPSupport\Router;
 
 use Psr\Http\Message\ResponseInterface;
 

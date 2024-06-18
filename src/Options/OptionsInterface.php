@@ -1,5 +1,5 @@
 <?php
-namespace CodeZone\PluginSupport\Options;
+namespace CodeZone\WPSupport\Options;
 
 interface OptionsInterface {
 	public function get( string $key, $default = null, $required = false );

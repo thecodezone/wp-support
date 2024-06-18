@@ -2,9 +2,9 @@
 
 namespace Tests;
 
-use CodeZone\PluginSupport\Router\ResponseFactory;
-use CodeZone\PluginSupport\Router\ResponseRendererInterface;
-use CodeZone\PluginSupport\Router\ResponseResolverInterface;
+use CodeZone\WPSupport\Router\ResponseFactory;
+use CodeZone\WPSupport\Router\ResponseRendererInterface;
+use CodeZone\WPSupport\Router\ResponseResolverInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class ResponseTest extends TestCase {
@@ -40,7 +40,7 @@ class ResponseTest extends TestCase {
             ->method( 'render' )
             ->with( $response );
         $resolver = $this->getContainer()->get( ResponseResolverInterface::class );
-        $resolver->setRenderer( $renderer );
+        $resolver->set_renderer( $renderer );
         $output = $resolver->resolve( $response );
     }
 }

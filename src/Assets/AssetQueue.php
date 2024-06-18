@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeZone\PluginSupport\Assets;
+namespace CodeZone\WPSupport\Assets;
 
 /**
  * Class AssetQueue

@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeZone\PluginSupport\Router;
+namespace CodeZone\WPSupport\Router;
 
 use League\Route\Router;
 use Psr\Http\Message\ResponseInterface;
@@ -65,8 +65,8 @@ class Route implements RouteInterface
      * @return self The instance of the class.
      * @eee https://docs.laminas.dev/laminas-diactoros/
      */
-    public function as_uri( $uri ): self {
-        return $this->with_request(
+    public function uri($uri ): self {
+        return $this->request(
             ServerRequestFactory::with_uri( $uri )
         );
     }
@@ -78,7 +78,7 @@ class Route implements RouteInterface
      *
      * @return self The instance of the class.
      */
-    public function with_middleware( $middleware ): self {
+    public function middleware($middleware ): self {
 
         if ( is_array( $middleware ) ) {
             foreach ( $middleware as $m ) {
@@ -99,7 +99,7 @@ class Route implements RouteInterface
      * @param mixed $request The request for the route.
      * @return self The instance of the class.
      */
-    public function with_request( $request ): self {
+    public function request($request ): self {
         $this->request = $request;
         return $this;
     }
@@ -110,7 +110,7 @@ class Route implements RouteInterface
      * @param callable $register_routes The callback function that registers routes to the router.
      * @return self The instance of the class.
      */
-    public function with_routes( callable $register_routes ): self {
+    public function routes(callable $register_routes ): self {
         $register_routes( $this->router );
         return $this;
     }
@@ -121,8 +121,8 @@ class Route implements RouteInterface
      * @param string $file The path to the file containing the routes.
      * @return self Returns an instance of the current class.
      */
-    public function from_file( $file ): self {
-        return $this->with_routes( function ( $r ) use ( $file ) {
+    public function file( $file ): self {
+        return $this->routes( function ($r ) use ( $file ) {
             require_once $file;
         });
     }
@@ -145,7 +145,7 @@ class Route implements RouteInterface
      * @return self Returns an instance of the current class.
      */
     public function render_with( ResponseRendererInterface $renderer ): self {
-        $this->resolver->setRenderer( $renderer );
+        $this->resolver->set_renderer( $renderer );
         return $this;
     }
 
@@ -155,7 +155,7 @@ class Route implements RouteInterface
      *
      * @return self Returns an instance of the current class.
      */
-    public function render(): self {
+    public function resolve(): self {
         if ( !$this->response ) {
           $this->dispatch();
         }
