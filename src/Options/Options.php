@@ -2,10 +2,6 @@
 
 namespace CodeZone\WPSupport\Options;
 
-use function CodeZone\WPSupport\Services\add_option;
-use function CodeZone\WPSupport\Services\get_option;
-use function CodeZone\WPSupport\Services\update_option;
-
 /**
  * Class Options
  *
@@ -80,7 +76,7 @@ class Options implements OptionsInterface
             $key = $this->scope_key( $key );
         }
 
-        $result = \get_option( $key, $default );
+        $result = get_option( $key, $default );
 
 
         if ( $required && ! $result ) {
@@ -105,10 +101,10 @@ class Options implements OptionsInterface
             $key = $this->scope_key( $key );
         }
 
-        if ( \get_option( $key ) === false ) {
-            return \add_option( $key, $value );
+        if ( get_option( $key ) === false ) {
+            return add_option( $key, $value );
         } else {
-            return \update_option( $key, $value );
+            return update_option( $key, $value );
         }
     }
 }
