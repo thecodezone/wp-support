@@ -7,7 +7,7 @@ use CodeZone\PluginSupport\Assets\AssetQueue;
 use CodeZone\PluginSupport\Assets\AssetQueueInterface;
 use CodeZone\PluginSupport\Cache\Cache;
 use CodeZone\PluginSupport\Cache\CacheInterface;
-use CodeZone\PluginSupport\Factories\ContainerFactory;
+use CodeZone\PluginSupport\Container\ContainerFactory;
 use CodeZone\PluginSupport\Options\Options;
 use CodeZone\PluginSupport\Options\OptionsInterface;
 use CodeZone\PluginSupport\Router\ResponseResolver;

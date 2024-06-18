@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use CodeZone\PluginSupport\Factories\ResponseFactory;
+use CodeZone\PluginSupport\Router\ResponseFactory;
 use CodeZone\PluginSupport\Router\ResponseRendererInterface;
 use CodeZone\PluginSupport\Router\ResponseResolverInterface;
 use Psr\Http\Message\ResponseInterface;

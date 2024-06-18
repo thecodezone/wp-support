@@ -2,7 +2,6 @@
 
 namespace CodeZone\PluginSupport\Router;
 
-use CodeZone\PluginSupport\Factories\ServerRequestFactory;
 use League\Route\Router;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
