@@ -15,7 +15,7 @@ use function response;
 class Nonce implements MiddlewareInterface {
 	protected $nonce_name;
 
-	public function __construct( $nonce_name ) {
+	public function __construct( $nonce_name = "_wpnonce" ) {
 		$this->nonce_name = $nonce_name;
 	}
 
