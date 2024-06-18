@@ -3,7 +3,6 @@
 namespace CodeZone\WPSupport\Router;
 
 use GuzzleHttp\Psr7\Response;
-use League\Config\Configuration;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use League\Container\ServiceProvider\BootableServiceProviderInterface;
 use League\Route\Http\Exception\NotFoundException;
@@ -23,23 +22,6 @@ use League\Route\Router;
  * @package Your\Namespace
  */
 abstract class RouteServiceProvider extends AbstractServiceProvider implements BootableServiceProviderInterface {
-
-    /**
-     * Represents the configuration settings for the application.
-     *
-     * @var array $config An associative array containing the configuration settings
-     */
-    protected $config;
-
-    /**
-     * The configuration instance.
-     *
-     * @var Configuration
-     */
-    public function __construct( Configuration $config )
-    {
-        $this->config = $config;
-    }
 
     /**
      * Retrieves the files configuration from the config object.
