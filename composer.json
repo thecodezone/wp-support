@@ -1,6 +1,6 @@
 {
-  "name": "codezone/plugin",
-  "description": "Support utilities for building DT plugins.",
+  "name": "codezone/wp-support",
+  "description": "Support utilities for building WordPress plugins.",
   "type": "library",
   "license": "GPL-2.0-only",
   "autoload": {
