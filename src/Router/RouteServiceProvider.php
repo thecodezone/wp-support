@@ -133,15 +133,6 @@ abstract class RouteServiceProvider extends AbstractServiceProvider implements B
             'query' => '',
         ];
         $file = array_merge( $defaults, $file );
-        $file_path = $file['file'];
-
-        if ( ! file_exists( $file_path ) ) {
-            if ( WP_DEBUG ) {
-                throw new \Exception( esc_html( "The file $file_path does not exist." ) );
-            } else {
-                return;
-            }
-        }
 
         add_filter( 'query_vars', function ( $vars ) use ( $file ) {
             return $this->file_query_vars( $file, $vars );
