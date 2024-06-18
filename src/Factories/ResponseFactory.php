@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeZone\DT\Factories;
+namespace CodeZone\PluginSupport\Factories;
 
 use Psr\Http\Message\ResponseInterface;
 

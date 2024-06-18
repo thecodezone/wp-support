@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use CodeZone\DT\Factories\ResponseFactory;
-use CodeZone\DT\Factories\ServerRequestFactory;
+use CodeZone\PluginSupport\Factories\ResponseFactory;
+use CodeZone\PluginSupport\Factories\ServerRequestFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

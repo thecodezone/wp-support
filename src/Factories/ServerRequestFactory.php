@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeZone\DT\Factories;
+namespace CodeZone\PluginSupport\Factories;
 
 use GuzzleHttp\Psr7\CachingStream;
 use GuzzleHttp\Psr7\LazyOpenStream;

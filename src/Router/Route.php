@@ -1,8 +1,8 @@
 <?php
 
-namespace CodeZone\DT\Services;
+namespace CodeZone\PluginSupport\Router;
 
-use CodeZone\DT\Factories\ServerRequestFactory;
+use CodeZone\PluginSupport\Factories\ServerRequestFactory;
 use League\Route\Router;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -41,21 +41,21 @@ class Route implements RouteInterface
     /**
      * The $renderer variable is used to generate HTML or JSON output from a Response.
      *
-     * @var ResponseRenderer
+     * @var ResponseResolver
      */
-    protected $renderer;
+    protected $resolver;
 
     /**
      * Class constructor.
      *
      * @param Router $router The router instance.
      * @param ServerRequestInterface $request The server request instance.
-     * @param ResponseRenderer $renderer The response renderer instance.
+     * @param ResponseResolver $resolver The response renderer instance.
      */
-    public function __construct( Router $router, ServerRequestInterface $request, ResponseRenderer $renderer ) {
+    public function __construct( Router $router, ServerRequestInterface $request, ResponseResolver $resolver ) {
         $this->router = $router;
         $this->request = $request;
-        $this->renderer = $renderer;
+        $this->resolver = $resolver;
     }
 
     /**
@@ -139,6 +139,18 @@ class Route implements RouteInterface
     }
 
     /**
+     * Sets the response renderer to be used for rendering the response.
+     *
+     * @param ResponseRendererInterface $renderer The response renderer to be set.
+     *
+     * @return self Returns an instance of the current class.
+     */
+    public function render_with( ResponseRendererInterface $renderer ): self {
+        $this->resolver->setRenderer( $renderer );
+        return $this;
+    }
+
+    /**
      * Renders the response using the renderer if it exists.
      * If the response is not set, it dispatches the request to the router first.
      *
@@ -150,7 +162,7 @@ class Route implements RouteInterface
         }
 
         if ( $this->response ) {
-            $this->renderer->render( $this->response );
+            $this->resolver->resolve( $this->response );
         }
 
         return $this;

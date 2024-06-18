@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeZone\DT\Factories;
+namespace CodeZone\PluginSupport\Factories;
 
 use League\Container\Container;
 use League\Container\ReflectionContainer;
