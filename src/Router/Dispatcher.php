@@ -29,6 +29,15 @@ class Dispatcher extends LeagueDispatcher
         if ($route_query_var) {
             $path = get_query_var($route_query_var);
             $uri = '/' . \trim($path, '/');
+        } else {
+            $page = $request->getQueryParams()['page'] ?? null;
+            $tab = $request->getQueryParams()['tab'] ?? null;
+            if ($page) {
+                $uri = $uri . "?page=$page";
+            }
+            if ($tab) {
+                $uri = $uri . "&tab=$tab";
+            }
         }
         $match = $this->dispatch($method, $uri);
 
