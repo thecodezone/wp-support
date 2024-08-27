@@ -184,17 +184,6 @@ abstract class RouteServiceProvider extends AbstractServiceProvider implements B
     }
 
     /**
-     * Retrieves the file URI based on the file configuration.
-     *
-     * @param array $file The array containing file configuration.
-     * @return string The file URI.
-     */
-    protected function file_uri( $file ) {
-        $query = get_query_var( $file['query'] );
-        return '/' . trim( $query, '/' );
-    }
-
-    /**
      * Routes a file with the given route and file configuration.
      *
      * @param RouteInterface $route The route to be used for routing the file.
@@ -204,7 +193,7 @@ abstract class RouteServiceProvider extends AbstractServiceProvider implements B
     protected function route_file( RouteInterface $route, $file ) {
         $route->middleware( $this->middleware() )
             ->file( $file['file'] )
-            ->uri( $this->file_uri( $file ) );
+            ->rewrite( $file['query'] );
 
         if ( WP_DEBUG ) {
             $route->dispatch();
