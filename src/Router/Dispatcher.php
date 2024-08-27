@@ -21,16 +21,16 @@ class Dispatcher extends LeagueDispatcher
     public function dispatchRequest( ServerRequestInterface $request ): ResponseInterface
     {
         $method = $request->getMethod();
-        $uri    = $request->getUri()->getPath();
+        $uri = $request->getUri()->getPath();
 
         //If we're using a query var to determine the route
-        $route_query_var     = $request->getQueryParams()['route_query'] ?? null;
-        if( $route_query_var ) {
-            $path = get_query_var( $request['route_query'] );
-            $uri = '/' . trim( $path, '/' );
-        }
+        $route_query_var = $request->getAttribute('ROUTE_PARAM');
 
-        $match  = $this->dispatch($method, $uri);
+        if ($route_query_var) {
+            $path = get_query_var($route_query_var);
+            $uri = '/' . \trim($path, '/');
+        }
+        $match = $this->dispatch($method, $uri);
 
         switch ($match[0]) {
             case FastRoute::NOT_FOUND:

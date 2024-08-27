@@ -61,17 +61,12 @@ class Route implements RouteInterface
     /**
      * Rewrites the query parameter in the request URI and returns an instance of the current class.
      *
-     * @param string|array $query The new query parameter value or an associative array of query parameters.
+     * @param string|array $route_query The new query parameter value or an associative array of query parameters.
      * @return self Returns an instance of the current class.
      */
-    public function rewrite( $query ) : self
+    public function rewrite( $route_query ) : self
     {
-        $uri = $this->request->getUri();
-        $query_params = [];
-        parse_str($uri->getQuery(), $query_params);
-        $query_params['route_query'] = $query;
-        $new_uri = $uri->withQuery( http_build_query($query_params) );
-        $this->request = $this->request->withUri( $new_uri );
+        $this->request = $this->request->withAttribute('ROUTE_PARAM', $route_query);
         return $this;
     }
 

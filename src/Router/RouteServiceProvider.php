@@ -10,7 +10,6 @@ use League\Route\Strategy\ApplicationStrategy;
 use League\Route\Strategy\StrategyInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use League\Route\Router;
 
 /**
  * Class RouteServiceProvider
