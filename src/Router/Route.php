@@ -9,8 +9,9 @@ use Psr\Http\Message\ServerRequestInterface;
 /**
  * Class Route
  *
- * Represents a route in the application.
- * @see https://route.thephpleague.com/4.x/usage/
+ * The Route class is responsible for handling routes and dispatching requests to the router.
+ *
+ * @package YourPackageName
  */
 class Route implements RouteInterface
 {
@@ -58,16 +59,15 @@ class Route implements RouteInterface
     }
 
     /**
-     * Initialize the router with a specified URI instead of relying on the REQUEST_URI.
-     * This is useful for testing or for scoping the router to a subdirectory.
+     * Rewrites the query parameter in the request URI and returns an instance of the current class.
      *
-     * @param string $uri The URI to set for the request.
-     * @return self The instance of the class.
+     * @param string|array $route_query The new query parameter value or an associative array of query parameters.
+     * @return self Returns an instance of the current class.
      */
-    public function uri( $uri ): self {
-        return $this->request(
-            ServerRequestFactory::with_uri( $uri )
-        );
+    public function rewrite( $route_query ) : self
+    {
+        $this->request = $this->request->withAttribute('ROUTE_PARAM', $route_query);
+        return $this;
     }
 
     /**
@@ -77,7 +77,7 @@ class Route implements RouteInterface
      *
      * @return self The instance of the class.
      */
-    public function middleware($middleware ): self {
+    public function middleware( $middleware ): self {
 
         if ( is_array( $middleware ) ) {
             foreach ( $middleware as $m ) {
@@ -98,7 +98,7 @@ class Route implements RouteInterface
      * @param mixed $request The request for the route.
      * @return self The instance of the class.
      */
-    public function request($request ): self {
+    public function request( $request ): self {
         $this->request = $request;
         return $this;
     }

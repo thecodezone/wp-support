@@ -2,7 +2,7 @@
  namespace CodeZone\WPSupport\Router;
 
 interface RouteInterface {
-	public function uri($uri ): \CodeZone\WPSupport\Router\Route;
+    public function rewrite( $route_query ) : self;
 	public function middleware($middleware ): \CodeZone\WPSupport\Router\Route;
 	public function request($request ): \CodeZone\WPSupport\Router\Route;
 	public function routes(callable $register_routes ): \CodeZone\WPSupport\Router\Route;
