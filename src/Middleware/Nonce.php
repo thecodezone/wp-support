@@ -39,7 +39,7 @@ class Nonce implements MiddlewareInterface {
             return ResponseFactory::make( 'Nonce is required.', 403 );
         }
 
-        if ( ! \wp_verify_nonce( $nonce, $this->nonce_action ) ) {
+        if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
             return ResponseFactory::make( 'Invalid nonce.', 403 );
         }
 
