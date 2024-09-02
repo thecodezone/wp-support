@@ -18,9 +18,9 @@ class Config implements ConfigInterface
      *
      * @return void
      */
-    public function __construct(array $config = [])
+    public function __construct( array $config = [] )
     {
-        $this->config = new DotArray($config);
+        $this->config = new DotArray( $config );
     }
 
     /**
@@ -31,9 +31,9 @@ class Config implements ConfigInterface
      *
      * @return mixed The value associated with the key, or the default value if the key is not found.
      */
-    public function get($key, $default = null)
+    public function get( $key, $default = null )
     {
-        return $this->config->get($key, $default);
+        return $this->config->get( $key, $default );
     }
 
     /**
@@ -44,9 +44,9 @@ class Config implements ConfigInterface
      *
      * @return void
      */
-    public function set($key, $value)
+    public function set( $key, $value )
     {
-        $this->config->set($key, $value);
+        $this->config->set( $key, $value );
     }
 
     /**
@@ -56,9 +56,9 @@ class Config implements ConfigInterface
      *
      * @return void
      */
-    public function merge(array $config)
+    public function merge( array $config )
     {
-        $this->config = new DotArray(array_replace_recursive($this->config->to_array(), $config));
+        $this->config = new DotArray( array_replace_recursive( $this->config->to_array(), $config ) );
     }
 
     /**

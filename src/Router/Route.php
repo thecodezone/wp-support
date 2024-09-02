@@ -59,13 +59,12 @@ class Route implements RouteInterface
 
     /**
      * Initialize the router with a specified URI instead of relying on the REQUEST_URI.
-     * This is useful for testing or for scp[omg the router to a subdirectory.
+     * This is useful for testing or for scoping the router to a subdirectory.
      *
      * @param string $uri The URI to set for the request.
      * @return self The instance of the class.
-     * @eee https://docs.laminas.dev/laminas-diactoros/
      */
-    public function uri($uri ): self {
+    public function uri( $uri ): self {
         return $this->request(
             ServerRequestFactory::with_uri( $uri )
         );
