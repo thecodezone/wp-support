@@ -27,6 +27,17 @@ class ServerRequestFactory {
         ]), $_GET, $_POST, $_COOKIE, $_FILES ); // phpcs:ignore
     }
 
+	/**
+	 * Sets the query parameters in the request and returns a new instance of the ServerRequestInterface.
+	 *
+	 * @param array $query_params The query parameters to be set in the request.
+	 *
+	 * @return ServerRequestInterface A new instance of the ServerRequestInterface with the updated query parameters.
+	 */
+	public static function with_query_params( $query_params ): ServerRequestInterface {
+		return self::make( $_SERVER, $query_params, $_POST, $_COOKIE, $_FILES ); // phpcs:ignore
+	}
+
     /**
      * Creates a new instance of the ServerRequestInterface from the global variables.
      *
