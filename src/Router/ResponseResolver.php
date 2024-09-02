@@ -31,7 +31,7 @@ class ResponseResolver implements ResponseResolverInterface
      *
      * @param ResponseRendererInterface $renderer The response renderer object.
      */
-    public function set_renderer(ResponseRendererInterface $renderer ) {
+    public function set_renderer( ResponseRendererInterface $renderer ) {
         $this->renderer = $renderer;
     }
 

@@ -64,9 +64,9 @@ class Route implements RouteInterface
      * @param string|array $route_query The new query parameter value or an associative array of query parameters.
      * @return self Returns an instance of the current class.
      */
-    public function rewrite( $route_query ) : self
+    public function rewrite( $route_query ): self
     {
-        $this->request = $this->request->withAttribute('ROUTE_PARAM', $route_query);
+        $this->request = $this->request->withAttribute( 'ROUTE_PARAM', $route_query );
         return $this;
     }
 
@@ -109,7 +109,7 @@ class Route implements RouteInterface
      * @param callable $register_routes The callback function that registers routes to the router.
      * @return self The instance of the class.
      */
-    public function routes(callable $register_routes ): self {
+    public function routes( callable $register_routes ): self {
         $register_routes( $this->router );
         return $this;
     }
@@ -121,7 +121,7 @@ class Route implements RouteInterface
      * @return self Returns an instance of the current class.
      */
     public function file( $file ): self {
-        return $this->routes( function ($r ) use ( $file ) {
+        return $this->routes( function ( $r ) use ( $file ) {
             require_once $file;
         });
     }

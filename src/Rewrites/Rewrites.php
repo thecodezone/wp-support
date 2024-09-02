@@ -39,8 +39,8 @@ class Rewrites implements RewritesInterface
      */
     public function has_latest()
     {
-        foreach( $this->rules as $regex => $query) {
-            if( ! $this->exists( $regex, $query ) ) {
+        foreach ( $this->rules as $regex => $query ) {
+            if ( ! $this->exists( $regex, $query ) ) {
                 return false;
             }
         }
@@ -60,13 +60,13 @@ class Rewrites implements RewritesInterface
      *
      * @see flush_rewrite_rules() To flush the rewrite rules.
      */
-    public function exists($rule, $query = null) {
+    public function exists( $rule, $query = null ) {
         global $wp_rewrite;
         $rules = $wp_rewrite->wp_rewrite_rules();
-        if (!isset($rules[$rule])) {
+        if ( !isset( $rules[$rule] ) ) {
             return false;
         }
-        if ($query && $rules[$rule] !== $query) {
+        if ( $query && $rules[$rule] !== $query ) {
             return false;
         }
         return true;
@@ -84,7 +84,7 @@ class Rewrites implements RewritesInterface
      * @param string $query The query string or template that will be used to fulfill the request.
      * @return void
      */
-    public function add($regex, $query) {
+    public function add( $regex, $query ) {
         add_rewrite_rule(
             $regex,
             $query,
@@ -101,8 +101,8 @@ class Rewrites implements RewritesInterface
      * @return void
      */
     public function apply() {
-        foreach ($this->rules as $regex => $query) {
-            $this->add($regex, $query);
+        foreach ( $this->rules as $regex => $query ) {
+            $this->add( $regex, $query );
         }
     }
 
@@ -115,7 +115,7 @@ class Rewrites implements RewritesInterface
      * @return void
      */
     public function sync() {
-        if( $this->has_latest() ) {
+        if ( $this->has_latest() ) {
             $this->apply();
             return;
         }

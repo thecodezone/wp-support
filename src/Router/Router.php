@@ -17,19 +17,19 @@ class Router extends LeagueRouter
     public function dispatch(ServerRequestInterface $request): ResponseInterface
     {
         if ( false === $this->routesPrepared ) {
-            $this->prepareRoutes($request);
+            $this->prepareRoutes( $request );
         }
 
         /** @var Dispatcher $dispatcher */
-        $dispatcher = (new Dispatcher($this->routesData))->setStrategy($this->getStrategy());
+        $dispatcher = ( new Dispatcher( $this->routesData ) )->setStrategy( $this->getStrategy() );
 
-        foreach ($this->getMiddlewareStack() as $middleware) {
-            if (is_string($middleware)) {
-                $dispatcher->lazyMiddleware($middleware);
+        foreach ( $this->getMiddlewareStack() as $middleware ) {
+            if ( is_string( $middleware ) ) {
+                $dispatcher->lazyMiddleware( $middleware );
                 continue;
             }
 
-            $dispatcher->middleware($middleware);
+            $dispatcher->middleware( $middleware );
         }
 
         return $dispatcher->dispatchRequest( $request );

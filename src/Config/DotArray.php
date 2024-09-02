@@ -1,6 +1,7 @@
 <?php
 
 namespace CodeZone\WPSupport\Config;
+
 /**
  * Class DotArray
  *
@@ -17,7 +18,7 @@ class DotArray
      *
      * @return void
      */
-    public function __construct(array $array)
+    public function __construct( array $array )
     {
         $this->array = $array;
     }
@@ -29,13 +30,13 @@ class DotArray
      * @param mixed $default (optional) The default value to return if the key is not found. Defaults to null.
      * @return mixed The value of the key if found, otherwise the default value.
      */
-    public function get($key, $default = null)
+    public function get( $key, $default = null )
     {
-        $path = explode('.', $key);
+        $path = explode( '.', $key );
 
         $temp = &$this->array;
-        foreach ($path as $dir) {
-            if (!isset($temp[$dir])) {
+        foreach ( $path as $dir ) {
+            if ( !isset( $temp[$dir] ) ) {
                 return $default;
             }
             $temp = &$temp[$dir];
@@ -51,14 +52,14 @@ class DotArray
      * @param mixed $value The value to set for the key.
      * @return $this
      */
-    public function set($key, $value)
+    public function set( $key, $value )
     {
-        $path = explode('.', $key);
+        $path = explode( '.', $key );
 
         $temp = &$this->array;
-        foreach ($path as $dir) {
-            if (!isset($temp[$dir])) {
-                $temp[$dir] = array();
+        foreach ( $path as $dir ) {
+            if ( !isset( $temp[$dir] ) ) {
+                $temp[$dir] = [];
             }
             $temp = &$temp[$dir];
         }

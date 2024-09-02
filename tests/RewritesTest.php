@@ -11,7 +11,7 @@ class RewritesTest extends TestCase {
     public function it_can_check_if_rewrite_exists()
     {
         global $wp_rewrite;
-        $wp_rewrite = $this->getMockBuilder('StdClass')
+        $wp_rewrite = $this->getMockBuilder( 'StdClass' )
             ->addMethods( [ 'wp_rewrite_rules' ] )
             ->getMock();
 
@@ -29,9 +29,8 @@ class RewritesTest extends TestCase {
         $rewrites = new Rewrites( $rules );
 
         $this->assertTrue( $rewrites->exists( '^dt/plugin/api/(.+)/?' ) );
-        $this->assertTrue( $rewrites->exists(  '^dt/plugin/api/(.+)/?', 'index.php?dt-plugin-api=$matches[1]' ) );
+        $this->assertTrue( $rewrites->exists( '^dt/plugin/api/(.+)/?', 'index.php?dt-plugin-api=$matches[1]' ) );
         $this->assertFalse( $rewrites->exists( '^dt/plugin/api/(.+)/?', 'index.php?dt-plugin=/' ) );
-        $this->assertFalse($rewrites->exists( '^dt/wrong/api/(.+)/?' ) );
-
+        $this->assertFalse( $rewrites->exists( '^dt/wrong/api/(.+)/?' ) );
     }
 }
