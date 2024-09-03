@@ -8,8 +8,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use function config;
-use function Middleware\get_query_var;
-use function Middleware\wp_verify_nonce;
 use function response;
 
 class Nonce implements MiddlewareInterface {
