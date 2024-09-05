@@ -20,7 +20,7 @@ class Route implements RouteInterface
      * The Router Instance.
      * @see https://route.thephpleague.com/4.x/usage/
      */
-    protected $router;
+    public $router;
 
     /**
      * The $request variable holds the HTTP request data.
@@ -28,7 +28,7 @@ class Route implements RouteInterface
      *
      * @var ServerRequestInterface | null
      */
-    protected $request;
+    public $request;
 
     /**
      * The $response variable holds the HTTP response data.
@@ -36,7 +36,7 @@ class Route implements RouteInterface
      *
      * @var ResponseInterface | null
      */
-    protected $response;
+    public $response;
 
     /**
      * The $renderer variable is used to generate HTML or JSON output from a Response.
