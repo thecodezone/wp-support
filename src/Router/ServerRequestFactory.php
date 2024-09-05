@@ -69,4 +69,29 @@ class ServerRequestFactory {
             ->withParsedBody( $post )
             ->withUploadedFiles( ServerRequest::normalizeFiles( $files ) );
     }
+
+    /**
+     * Creates a ServerRequestInterface object based on the provided parameters.
+     *
+     * @param string $method The HTTP method of the request.
+     * @param string $uri The URI of the request.
+     * @param array $params (optional) The parameters to include in the request.
+     * @param array $server (optional) The server parameters for the request.
+     * @param array $cookies (optional) The cookie parameters for the request.
+     * @param array $files (optional) The uploaded files for the request.
+     * @return \Psr\Http\Message\ServerRequestInterface The created ServerRequestInterface object.
+     */
+    public static function request( $method, $uri, $params = [], $server = [], $cookies = [], $files = [] ): ServerRequestInterface {
+        $get  = [];
+        $post = [];
+        if (strtoupper($method) === 'GET') {
+            $server['QUERY_STRING'] = http_build_query( $params );
+            $get = $params;
+        } else {
+            $post = $params;
+        }
+        $server['REQUEST_METHOD'] = strtoupper($method);
+        $server['REQUEST_URI'] = $uri;
+        return self::make( $server, $get, $post, $cookies, $files );
+    }
 }
