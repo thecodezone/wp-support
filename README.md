@@ -54,7 +54,7 @@ $config->get('plugin.handle');
 $config->set('plugin.url', site_url() );
 $config->merge( [
   'plugin' => [
-    'translations => [
+    'translations' => [
       'greeting' => 'Hello World'
     ] ] ] );
 $array = $config->to_array();
