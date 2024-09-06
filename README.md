@@ -23,7 +23,7 @@ Pass an array of allowed script and style handles. Any handle not includes will 
 $asset_queue = new AssetQueue();
 $asset_queue->filter(
     [ 'your_style' ],
-    [ 'your_script'
+    [ 'your_script' ]
 );
 ```
 ## Cache
