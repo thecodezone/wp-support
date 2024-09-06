@@ -132,11 +132,23 @@ class AssetQueue implements AssetQueueInterface
      *
      * @return bool True if the asset is a Vite asset, false otherwise.
      */
-    protected function is_vite_asset( $asset_handle ) {
+    public function is_vite_asset( $asset_handle ) {
         return strpos( $asset_handle, 'vite-client' ) !== false;
     }
 
-    protected function in_whitelist( $handle, $whitelist )
+    /**
+     * Determines if a handle is included in the whitelist.
+     *
+     * This method takes a script handle and checks if it is included in the whitelist array.
+     * It uses array_filter to filter out values in the whitelist array that do not match the
+     * given handle. If the filtered array is not empty, the method returns true, indicating that
+     * the handle is included in the whitelist. Otherwise, it returns false.
+     *
+     * @param string $handle The script handle to check.
+     * @param array $whitelist The whitelist array to check against.
+     * @return bool Whether the handle is included in the whitelist or not.
+     */
+    protected function in_whitelist($handle, $whitelist )
     {
         $filteredArray = array_filter($whitelist, function ( $value ) use ( $handle ) {
             return strpos( $handle, $value ) === 0;
