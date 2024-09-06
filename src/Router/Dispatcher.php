@@ -28,19 +28,22 @@ class Dispatcher extends LeagueDispatcher
             $path = get_query_var( $route_query_var );
             $uri = '/' . trim( $path, '/' );
         } else {
-            $uri = str_replace( site_url(), '', $request->getUri()->__toString() );
-            $uri = '/' . trim( $uri, '/' );
+            $uri = \str_replace( site_url(), '', $request->getUri()->__toString() );
+            //Strip the query string
+            $uri = \explode('?', $uri)[0];
+            $uri = '/' . \trim($uri, '/');
             $page = $request->getQueryParams()['page'] ?? null;
-            $tab = $request->getQueryParams()['tab'] ?? null;
-            $action = $request->getQueryParams()['action'] ?? null;
-            if ( $page ) {
-                $uri = $uri . "?page=$page";
-            }
-            if ( $tab ) {
-                $uri = $uri . "&tab=$tab";
-            }
-            if ( $action ) {
-                $uri = $uri . "&action=$action";
+            if ($page) {
+                $uri = $uri . "?page={$page}";
+                $tab = $request->getQueryParams()['tab'] ?? null;
+                $action = $request->getQueryParams()['action'] ?? null;
+
+                if ($tab) {
+                    $uri = $uri . "&tab={$tab}";
+                }
+                if ($action) {
+                    $uri = $uri . "&action={$action}";
+                }
             }
         }
 
