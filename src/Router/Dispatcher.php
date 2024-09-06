@@ -21,15 +21,15 @@ class Dispatcher extends LeagueDispatcher
     public function dispatchRequest( ServerRequestInterface $request ): ResponseInterface
     {
         $method = $request->getMethod();
-        $uri = $request->getUri()->getPath();
-
         //If we're using a query var to determine the route
         $route_query_var = $request->getAttribute( 'ROUTE_PARAM' );
 
         if ( $route_query_var ) {
             $path = get_query_var( $route_query_var );
-            $uri = '/' . \trim( $path, '/' );
+            $uri = '/' . trim( $path, '/' );
         } else {
+            $uri = str_replace( site_url(), '', $request->getUri()->__toString() );
+            $uri = '/' . trim( $uri, '/' );
             $page = $request->getQueryParams()['page'] ?? null;
             $tab = $request->getQueryParams()['tab'] ?? null;
             $action = $request->getQueryParams()['action'] ?? null;
@@ -43,6 +43,7 @@ class Dispatcher extends LeagueDispatcher
                 $uri = $uri . "&action=$action";
             }
         }
+
         $match = $this->dispatch( $method, $uri );
 
         switch ( $match[0] ) {
