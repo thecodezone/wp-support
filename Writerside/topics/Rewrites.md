@@ -41,13 +41,13 @@ $rewrites->exists( '^wp/plugin/?$' );
 $rewrites->exists( '^wp/plugin/?$', 'index.php?wp-plugin=/' );
 ```
 
-### Adding a rewrite rule
+## Adding a rewrite rule
 
 ```php
 $rewrites->add( '^wp/plugin/?$', 'index.php?wp-plugin=/' );
 ```
 
-### Apply all loaded rules
+## Apply all loaded rules
 
 ```php
 $rewrites = new Rewrites( $rules );
@@ -55,7 +55,7 @@ $rewrites->apply();
 ```
 
 
-### Sync the rules
+## Sync the rules
 
 if the instances rewrite rules aren't current, refresh them.
 
@@ -63,7 +63,7 @@ if the instances rewrite rules aren't current, refresh them.
 $rewrites->sync();
 ```
 
-### Flush and reapply the rules
+## Flush and reapply the rules
 
 ```php
 $rewrites->flush();
