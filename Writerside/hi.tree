@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="hi"
+                 name="WP Support"
+                 start-page="intro.md">
+
+    <toc-element topic="intro.md"/>
+    <toc-element topic="assets.md"/>
+    <toc-element topic="Cache.md"/>
+    <toc-element topic="Config.md"/>
+    <toc-element topic="ConfigFactory.md"/>
+    <toc-element topic="Middleware.md">
+        <toc-element topic="HasCap.md"/>
+        <toc-element topic="Nonce-Middleware.md"/>
+    </toc-element>
+    <toc-element topic="Options.md"/>
+    <toc-element topic="Rewrites.md"/>
+</instance-profile>
