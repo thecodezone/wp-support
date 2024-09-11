@@ -76,22 +76,28 @@ class ServerRequestFactory {
      * @param string $method The HTTP method of the request.
      * @param string $uri The URI of the request.
      * @param array $params (optional) The parameters to include in the request.
-     * @param array $server (optional) The server parameters for the request.
+     * @param array $headers (optional) The headers for the request.
      * @param array $cookies (optional) The cookie parameters for the request.
      * @param array $files (optional) The uploaded files for the request.
-     * @return \Psr\Http\Message\ServerRequestInterface The created ServerRequestInterface object.
+     * @return ServerRequestInterface The created ServerRequestInterface object.
      */
-    public static function request( $method, $uri, $params = [], $server = [], $cookies = [], $files = [] ): ServerRequestInterface {
-        $get  = [];
+    public static function request( $method, $uri, $params = [], $headers = [], $cookies = [], $files = [] ) : ServerRequestInterface
+    {
+        $get = [];
         $post = [];
-        if (strtoupper($method) === 'GET') {
-            $server['QUERY_STRING'] = http_build_query( $params );
+        $server = $_SERVER;
+        $server['REQUEST_METHOD'] = \strtoupper($method);
+        $server['REQUEST_URI'] = $uri;
+        if (\strtoupper($method) === 'GET') {
+            $server['QUERY_STRING'] = \http_build_query($params);
             $get = $params;
         } else {
             $post = $params;
         }
-        $server['REQUEST_METHOD'] = strtoupper($method);
-        $server['REQUEST_URI'] = $uri;
-        return self::make( $server, $get, $post, $cookies, $files );
+        $request = self::make($server, $get, $post, $cookies, $files);
+        foreach($headers as $key => $value) {
+            $request = $request->withHeader($key, $value);
+        }
+        return $request;
     }
 }
