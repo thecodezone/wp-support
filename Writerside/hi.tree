@@ -12,6 +12,7 @@
     <toc-element topic="Config.md"/>
     <toc-element topic="ConfigFactory.md"/>
     <toc-element topic="Route.md"/>
+    <toc-element topic="ServerRequestFactory.md"/>
     <toc-element topic="Middleware.md">
         <toc-element topic="HasCap.md"/>
         <toc-element topic="Nonce-Middleware.md"/>
