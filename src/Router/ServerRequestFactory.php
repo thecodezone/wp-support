@@ -5,6 +5,7 @@ namespace CodeZone\WPSupport\Router;
 use GuzzleHttp\Psr7\CachingStream;
 use GuzzleHttp\Psr7\LazyOpenStream;
 use GuzzleHttp\Psr7\ServerRequest;
+use GuzzleHttp\Psr7\Utils;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -94,10 +95,26 @@ class ServerRequestFactory {
         } else {
             $post = $params;
         }
+
         $request = self::make($server, $get, $post, $cookies, $files);
-        foreach($headers as $key => $value) {
+
+
+        if (isset($headers['Content-Type']) && $headers['Content-Type'] === 'application/x-www-form-urlencoded') {
+            $request = $request->withBody(
+                Utils::streamFor(http_build_query($params))
+            );
+        }
+
+        if (isset($headers['Content-Type']) && $headers['Content-Type'] === 'application/json') {
+            $request = $request->withBody(
+                Utils::streamFor(json_encode($params))
+            );
+        }
+
+        foreach ($headers as $key => $value) {
             $request = $request->withHeader($key, $value);
         }
+
         return $request;
     }
 }
