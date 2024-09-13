@@ -32,7 +32,7 @@ class Dispatcher extends LeagueDispatcher
             //or, in case we have an absolute URL that matches our site-urls for some reason.
             $site_url = site_url();
             $site_url_parts = \parse_url(site_url());
-            $site_uri = $site_url_parts['path'];
+            $site_uri = $site_url_parts['path'] ?? '';
             $uri = \str_replace( [$site_url, $site_uri], '', $request->getUri()->__toString() );
 
             //Strip the query string
