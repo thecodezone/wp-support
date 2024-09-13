@@ -26,7 +26,8 @@ class Dispatcher extends LeagueDispatcher
 
         if ( $route_query_var ) {
             $path = get_query_var( $route_query_var );
-            $uri = '/' . trim( $path, '/' );
+            $uri = \explode('?', $path)[0];
+            $uri = '/' . \trim($uri, '/');
         } else {
             //Strip the site install path from the request URI in case the site is installed in a subdirectory,
             //or, in case we have an absolute URL that matches our site-urls for some reason.
