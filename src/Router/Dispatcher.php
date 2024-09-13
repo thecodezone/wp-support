@@ -28,11 +28,19 @@ class Dispatcher extends LeagueDispatcher
             $path = get_query_var( $route_query_var );
             $uri = '/' . trim( $path, '/' );
         } else {
-            $uri = \str_replace( site_url(), '', $request->getUri()->__toString() );
+            //Strip the site install path from the request URI in case the site is installed in a subdirectory,
+            //or, in case we have an absolute URL that matches our site-urls for some reason.
+            $site_url = site_url();
+            $site_url_parts = \parse_url(site_url());
+            $site_uri = $site_url_parts['path'];
+            $uri = \str_replace( [$site_url, $site_uri], '', $request->getUri()->__toString() );
+
             //Strip the query string
             $uri = \explode('?', $uri)[0];
             $uri = '/' . \trim($uri, '/');
             $page = $request->getQueryParams()['page'] ?? null;
+
+            //Admin pages are normally routed via query vars, so we need to account for them.
             if ($page) {
                 $uri = $uri . "?page={$page}";
                 $tab = $request->getQueryParams()['tab'] ?? null;
