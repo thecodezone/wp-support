@@ -25,7 +25,7 @@
     "league/container": "4.*",
     "guzzlehttp/psr7": "^2.6",
     "kucrut/vite-for-wp": "^0.8.0",
-    "league/plates": "^3.5"
+    "league/plates": "3.5"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
