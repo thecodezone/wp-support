@@ -60,7 +60,7 @@ class ServerRequestFactory {
      */
     public static function make( $server, $get, $post, $cookie, $files ): ServerRequestInterface {
         $method = $server['REQUEST_METHOD'] ?? 'GET';
-        $headers = \getallheaders();
+        $headers = self::get_all_headers();
         $uri = $server['REQUEST_URI'] ?? ServerRequest::getUriFromGlobals();
         $body = new CachingStream( new LazyOpenStream( 'php://input', 'r+' ) );
         $protocol = isset( $server['SERVER_PROTOCOL'] ) ? \str_replace( 'HTTP/', '', $server['SERVER_PROTOCOL'] ) : '1.1';
@@ -70,6 +70,46 @@ class ServerRequestFactory {
             ->withParsedBody( $post )
             ->withUploadedFiles( ServerRequest::normalizeFiles( $files ) );
     }
+
+	/**
+	 * Retrieves all HTTP headers from the current request.
+	 *
+	 * This function processes the $_SERVER superglobal to extract and return
+	 * all headers that start with 'HTTP_' prefix. The headers are returned
+	 * as an associative array where the header names are formatted in a
+	 * human-readable form.
+	 *
+	 * @return array An associative array of HTTP headers from the request,
+	 *               with header names as keys.
+	 */
+	private static function get_all_headers(): array
+	{
+		$headers = [];
+		if ( function_exists( 'getallheaders' ) ) {
+			$headers = getallheaders();
+			if ( is_array( $headers ) ) {
+				return $headers;
+			}
+		}
+		if ( !isset( $_SERVER ) || !is_array( $_SERVER ) ) {
+			return $headers;
+		}
+		foreach ( $_SERVER as $name => $value ) {
+			if ( stripos( $name, 'HTTP_' ) === 0 ) {
+				$formatted_name = str_replace(
+					' ', '-',
+					ucwords(
+						strtolower(
+							str_replace( '_', ' ', substr( $name, 5 ) )
+						)
+					)
+				);
+				$headers[$formatted_name] = $value;
+			}
+		}
+
+		return $headers;
+	}
 
     /**
      * Creates a ServerRequestInterface object based on the provided parameters.
@@ -82,37 +122,37 @@ class ServerRequestFactory {
      * @param array $files (optional) The uploaded files for the request.
      * @return ServerRequestInterface The created ServerRequestInterface object.
      */
-    public static function request( $method, $uri, $params = [], $headers = [], $cookies = [], $files = [] ) : ServerRequestInterface
+    public static function request( $method, $uri, $params = [], $headers = [], $cookies = [], $files = [] ): ServerRequestInterface
     {
         $get = [];
         $post = [];
         $server = $_SERVER;
-        $server['REQUEST_METHOD'] = \strtoupper($method);
+        $server['REQUEST_METHOD'] = \strtoupper( $method );
         $server['REQUEST_URI'] = $uri;
-        if (\strtoupper($method) === 'GET') {
-            $server['QUERY_STRING'] = \http_build_query($params);
+        if ( \strtoupper( $method ) === 'GET' ) {
+            $server['QUERY_STRING'] = \http_build_query( $params );
             $get = $params;
         } else {
             $post = $params;
         }
 
-        $request = self::make($server, $get, $post, $cookies, $files);
+        $request = self::make( $server, $get, $post, $cookies, $files );
 
 
-        if (isset($headers['Content-Type']) && $headers['Content-Type'] === 'application/x-www-form-urlencoded') {
+        if ( isset( $headers['Content-Type'] ) && $headers['Content-Type'] === 'application/x-www-form-urlencoded' ) {
             $request = $request->withBody(
-                Utils::streamFor(http_build_query($params))
+                Utils::streamFor( http_build_query( $params ) )
             );
         }
 
-        if (isset($headers['Content-Type']) && $headers['Content-Type'] === 'application/json') {
+        if ( isset( $headers['Content-Type'] ) && $headers['Content-Type'] === 'application/json' ) {
             $request = $request->withBody(
-                Utils::streamFor(json_encode($params))
+                Utils::streamFor( json_encode( $params ) )
             );
         }
 
-        foreach ($headers as $key => $value) {
-            $request = $request->withHeader($key, $value);
+        foreach ( $headers as $key => $value ) {
+            $request = $request->withHeader( $key, $value );
         }
 
         return $request;
