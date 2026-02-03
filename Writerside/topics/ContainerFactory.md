@@ -1,4 +1,4 @@
-# ConfigFactory
+# ContainerFactory
 
 A simple implementation of [league/container](https://container.thephpleague.com/).
 
