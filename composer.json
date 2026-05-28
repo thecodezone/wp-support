@@ -1,5 +1,6 @@
 {
   "name": "codezone/wp-support",
+  "version": "1.1.6",
   "description": "Support utilities for building WordPress plugins.",
   "type": "library",
   "license": "GPL-2.0-only",
