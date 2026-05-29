@@ -148,12 +148,12 @@ class AssetQueue implements AssetQueueInterface
      * @param array $whitelist The whitelist array to check against.
      * @return bool Whether the handle is included in the whitelist or not.
      */
-    protected function in_whitelist($handle, $whitelist )
+    protected function in_whitelist( $handle, $whitelist )
     {
-        $filteredArray = array_filter($whitelist, function ( $value ) use ( $handle ) {
+        $filtered_array = array_filter($whitelist, function ( $value ) use ( $handle ) {
             return strpos( $handle, $value ) === 0;
         });
 
-        return count( $filteredArray ) > 0;
+        return count( $filtered_array ) > 0;
     }
 }

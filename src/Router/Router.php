@@ -13,15 +13,20 @@ use Psr\Http\Message\ServerRequestInterface;
 class Router extends LeagueRouter
 {
 
-    // @phpcs:ignore
-    public function dispatch(ServerRequestInterface $request): ResponseInterface
+    // phpcs:ignore
+    protected $routes_prepared = false;
+
+    // phpcs:ignore
+    protected $routes_data = [];
+
+    public function dispatch( ServerRequestInterface $request ): ResponseInterface
     {
-        if ( false === $this->routesPrepared ) {
+        if ( false === $this->routes_prepared ) {
             $this->prepareRoutes( $request );
         }
 
         /** @var Dispatcher $dispatcher */
-        $dispatcher = ( new Dispatcher( $this->routesData ) )->setStrategy( $this->getStrategy() );
+        $dispatcher = ( new Dispatcher( $this->routes_data ) )->setStrategy( $this->getStrategy() );
 
         foreach ( $this->getMiddlewareStack() as $middleware ) {
             if ( is_string( $middleware ) ) {

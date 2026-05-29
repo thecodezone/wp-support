@@ -32,7 +32,7 @@ class Nonce implements MiddlewareInterface {
      * @param string $nonce_header Optional. The name of the nonce header. Default is "X-WP-Nonce".
      * @return void
      */
-    public function __construct($nonce_action, $nonce_name = "_wpnonce", $nonce_header = "X-WP-Nonce" ) {
+    public function __construct( $nonce_action, $nonce_name = "_wpnonce", $nonce_header = "X-WP-Nonce" ) {
 		$this->nonce_action = $nonce_action;
 		$this->nonce_name = $nonce_name;
 		$this->nonce_header = $nonce_header;
@@ -46,7 +46,7 @@ class Nonce implements MiddlewareInterface {
      *
      * @return ResponseInterface The response object.
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler ): ResponseInterface
+    public function process( ServerRequestInterface $request, RequestHandlerInterface $handler ): ResponseInterface
     {
         $nonce = $request->getHeader( $this->nonce_header )[0] ?? null;
 
@@ -73,7 +73,7 @@ class Nonce implements MiddlewareInterface {
      * @param RequestInterface $request The request object from which to extract the input data.
      * @return array The extracted input data as an associative array.
      */
-    private function extract_request_input(RequestInterface $request ): array {
+    private function extract_request_input( RequestInterface $request ): array {
         $content_type = $request->getHeaderLine( 'Content-Type' );
 
         if ( strpos( $content_type, 'application/json' ) !== false ) {

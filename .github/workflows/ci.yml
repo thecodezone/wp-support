@@ -9,27 +9,26 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [ '7.4', '8.3' ]
+        php: [ '7.4', '8.1', '8.3' ]
 
     name: PHP ${{ matrix.php }}
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Install PHP
-        uses: shivammathur/setup-php@master
-        with:
-          php-version: ${{ matrix.php }}
-
       - uses: actions/checkout@v3
 
-      - uses: php-actions/composer@v3
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      - name: Install Dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Run Linting
+        run: composer lint
 
       - name: PHPUnit Tests
-        uses: php-actions/phpunit@master
-        with:
-          php_version: ${{ matrix.php }}
-          bootstrap: tests/bootstrap.php
-          configuration: phpunit.xml
+        run: composer test
 
       - name: Google Chat Notification
         uses: Co-qn/google-chat-notification@releases/v1

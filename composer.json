@@ -37,6 +37,15 @@
     "brain/monkey": "2.*",
     "phpunit/phpunit": "^9"
   },
+  "scripts": {
+    "lint:syntax": "parallel-lint . --exclude vendor --exclude .ddev",
+    "lint": [
+      "@lint:syntax",
+      "phpcs"
+    ],
+    "lint:fix": "phpcbf",
+    "test": "phpunit"
+  },
   "config": {
     "platform": {
       "php": "7.4.27"

@@ -91,6 +91,6 @@ class Cache implements CacheInterface
      */
     public function flush() {
         global $wpdb;
-        $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_{$this->prefix}_%'" );
+        $wpdb->query( $wpdb->prepare( "DELETE FROM $wpdb->options WHERE option_name LIKE %s", '_transient_' . $this->prefix . '_%' ) );
     }
 }

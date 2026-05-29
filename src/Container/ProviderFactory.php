@@ -14,7 +14,7 @@ class ProviderFactory
 {
     protected $container;
 
-    public function __construct(Container &$container)
+    public function __construct( Container &$container )
     {
         $this->container = $container;
     }
@@ -26,20 +26,20 @@ class ProviderFactory
      *                    or an array of identifiers.
      * @return array An empty array after loading the service provider(s).
      */
-    public function load($from)
+    public function load( $from )
     {
-        if (is_array($from)) {
-            return $this->load_many($from);
+        if ( is_array( $from ) ) {
+            return $this->load_many( $from );
         }
 
-        if (!is_string($from)) {
+        if ( !is_string( $from ) ) {
             $provider = $from;
         } else {
-            $provider = $this->container->get($from);
+            $provider = $this->container->get( $from );
         }
 
         $this->container->addServiceProvider( $provider );
-        $this->boot($provider);
+        $this->boot( $provider );
 
         return [];
     }
@@ -51,7 +51,7 @@ class ProviderFactory
      *                                   BootableServiceProviderInterface to be booted.
      * @return void
      */
-    public function boot(AbstractServiceProvider $provider_instance)
+    public function boot( object $provider_instance )
     {
         if ( $provider_instance instanceof BootableServiceProviderInterface ) {
             $provider_instance->boot();
@@ -64,10 +64,10 @@ class ProviderFactory
      * @param array $from An array of service provider identifiers to load.
      * @return void
      */
-    public function load_many(array $from)
+    public function load_many( array $from )
     {
         foreach ( $from as $provider ) {
-            $this->load($provider);
+            $this->load( $provider );
         }
     }
 }
