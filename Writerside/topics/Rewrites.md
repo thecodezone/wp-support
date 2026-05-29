@@ -12,8 +12,10 @@ if (!$rewrites->has_latest()) {
 or more simply:
 
 ```php
-$rewrites = new Rewrites( $rules );
-$rewrites->sync():
+$rewrites = new Rewrites( [
+    'regex' => 'index.php?var=value',
+] );
+$rewrites->sync();
 ```
 
 ## Flushing the rewrite rules
@@ -57,7 +59,7 @@ $rewrites->apply();
 
 ## Sync the rules
 
-if the instances rewrite rules aren't current, refresh them.
+if the instance's rewrite rules aren't current, refresh them.
 
 ```php
 $rewrites->sync();

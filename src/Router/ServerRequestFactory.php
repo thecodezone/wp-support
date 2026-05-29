@@ -9,11 +9,11 @@ use GuzzleHttp\Psr7\Utils;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * Class ContainerFactory
+ * Class ServerRequestFactory
  *
- * The ContainerFactory class is responsible for creating and managing instances of the Container class.
+ * The ServerRequestFactory class is responsible for creating PSR-7 ServerRequestInterface instances.
  *
- * @see https://container.thephpleague.com/4.x/
+ * @see https://www.php-fig.org/psr/psr-7/
  */
 class ServerRequestFactory {
     /**

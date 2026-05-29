@@ -45,22 +45,16 @@ Allows you to include routes from a separate routes file.
 $route->file('/absolute/path/to/some/routes/file.php')
 ```
 
-## Rewrite
+## Query-based Routing
 
-Connect the routes to the WordPress rewrite engine. Takes a WP query var name.
-
-<tip>
-See <a href="https://developer.wordpress.org/reference/functions/get_query_var/">get_query_var</a>.
-</tip>
-
-<tip>
-See <a href="https://developer.wordpress.org/reference/functions/add_rewrite_rule/">add_rewrite_rule</a>.
-</tip>
+The `rewrite()` method allows you to route requests based on a WordPress query variable. This is useful when you want to handle requests that have already been processed by WordPress's rewrite engine.
 
 ```PHP
 $route
     ->rewrite('wp-rewrite-query-var')
 ```
+
+This sets the `ROUTE_PARAM` attribute on the request, which the dispatcher uses to match the route.
 
 ## Dispatch
 
