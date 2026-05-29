@@ -1,6 +1,6 @@
 {
   "name": "codezone/wp-support",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "A suite of helpers for making WordPress theme and plugin development easier, including DI container wrappers, dot-notation configuration, and PSR-7 routing integration.",
   "keywords": [
     "wordpress",
