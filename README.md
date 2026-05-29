@@ -8,7 +8,7 @@
 WordPress Support
 --------------------
 
-A suite of framework helpers for making WordPress theme and plugin development easier. 
+A suite of modern framework helpers for making WordPress theme and plugin development easier. 
 
 ## Features
 
