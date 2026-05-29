@@ -36,23 +36,26 @@ Full documentation is available at [https://thecodezone.github.io/wp-support/](h
 
 ## Development
 
-This project uses [DDEV](https://ddev.com/) for local development.
-
 ### Setup
 
 ```bash
-ddev start
-ddev composer install
+composer install
 ```
 
 ### Linting
 
 ```bash
-ddev composer lint
+composer lint
 ```
 
 ### Testing
 
 ```bash
-ddev composer test
+composer test
+```
+
+### Versioning
+
+```bash
+composer version
 ```
