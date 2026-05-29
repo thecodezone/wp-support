@@ -1,0 +1,92 @@
+#!/bin/bash
+
+# Exit on error
+set -e
+
+# Fetch latest changes
+echo "Fetching from remote..."
+git fetch
+
+# Checkout main
+echo "Checking out main..."
+git checkout main
+git pull origin main
+
+# File containing the version
+VERSION_FILE="composer.json"
+PLUGIN_DIR="$(dirname "$0")/.."
+VERSION_PATH="$PLUGIN_DIR/$VERSION_FILE"
+
+# Get current version from composer.json
+CURRENT_VERSION=$(grep -m 1 '"version":' "$VERSION_PATH" | sed -E 's/.*"version": "(.*)".*/\1/')
+
+if [ -z "$CURRENT_VERSION" ]; then
+    echo "Warning: Version string is empty in $VERSION_PATH. Using 0.0.0 as base."
+    CURRENT_VERSION="0.0.0"
+fi
+
+echo "Current version: $CURRENT_VERSION"
+
+# Determine new version
+if [ -n "$1" ]; then
+    if [ "$1" == "minor" ]; then
+        MAJOR=$(echo "$CURRENT_VERSION" | cut -d. -f1)
+        MINOR=$(echo "$CURRENT_VERSION" | cut -d. -f2)
+        NEW_MINOR=$((MINOR + 1))
+        NEW_VERSION="$MAJOR.$NEW_MINOR.0"
+        echo "Bumping minor version: $NEW_VERSION"
+    elif [ "$1" == "patch" ]; then
+        BASE_VERSION=$(echo "$CURRENT_VERSION" | cut -d. -f1-2)
+        PATCH=$(echo "$CURRENT_VERSION" | cut -d. -f3)
+        NEW_PATCH=$((PATCH + 1))
+        NEW_VERSION="$BASE_VERSION.$NEW_PATCH"
+        echo "Bumping patch version: $NEW_VERSION"
+    else
+        NEW_VERSION=$1
+        echo "Using provided version: $NEW_VERSION"
+    fi
+else
+    # Default to bumping the last part of the version
+    BASE_VERSION=$(echo "$CURRENT_VERSION" | rev | cut -d. -f2- | rev)
+    LAST_PART=$(echo "$CURRENT_VERSION" | rev | cut -d. -f1 | rev)
+
+    if [[ "$CURRENT_VERSION" == *"."* ]]; then
+        NEW_LAST_PART=$((LAST_PART + 1))
+        NEW_VERSION="$BASE_VERSION.$NEW_LAST_PART"
+    else
+        NEW_VERSION=$((CURRENT_VERSION + 1))
+    fi
+    echo "Defaulting to bumping the last version point: $NEW_VERSION"
+fi
+
+# Update version in composer.json
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' "1,/\"version\": \".*\"/s/\"version\": \".*\"/\"version\": \"$NEW_VERSION\"/" "$VERSION_PATH"
+else
+    sed -i "1,/\"version\": \".*\"/s/\"version\": \".*\"/\"version\": \"$NEW_VERSION\"/" "$VERSION_PATH"
+fi
+
+# Run linting and update lock file before commit
+echo "Running composer lint:fix and updating lock file..."
+if command -v ddev > /dev/null 2>&1; then
+    ddev composer lint:fix || true
+    ddev composer install || true
+else
+    composer lint:fix || true
+    composer install || true
+fi
+
+# Git operations
+echo "Committing change..."
+cd "$PLUGIN_DIR"
+git add .
+git commit -m "$NEW_VERSION"
+
+echo "Tagging commit..."
+git tag -a "$NEW_VERSION" -m "$NEW_VERSION"
+
+echo "Pushing changes and tags..."
+git push origin main
+git push origin "$NEW_VERSION"
+
+echo "Version bumped to $NEW_VERSION successfully."

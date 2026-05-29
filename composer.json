@@ -55,7 +55,8 @@
       "phpcs"
     ],
     "lint:fix": "phpcbf",
-    "test": "phpunit"
+    "test": "phpunit",
+    "version": "bin/version"
   },
   "config": {
     "platform": {
