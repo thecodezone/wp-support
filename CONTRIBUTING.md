@@ -1,43 +1,38 @@
-Thank you for joining us in contributing to Disciple.Tools! These are the guidelines we expect you to follow in writing
-code that will be used in or with D.T.
+Thank you for contributing to WP Support! These are the guidelines we expect you to follow when writing code for this library.
 
-### Translations
+### Coding Standards
 
-D.T is already being used in multiple languages. Please help us make D.T translable by taking full advantage of
-Wordpress’ translatable strings. Any string that will be read by the user must be marked as translatable. Ex:
-`<label class="section-header"><?php esc_html_e( 'Other', 'dt-plugin' )?></label>`
+We use [PHPCS](https://github.com/squizlabs/PHP_CodeSniffer) and [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) to ensure code quality and consistency.
 
-Make sure you look for these in PHP, HTML and JavaScript code.
+You can run the linter locally using DDEV:
 
-### PHPCS
+```bash
+ddev composer lint
+```
 
-We use [PHPCS](https://github.com/squizlabs/PHP_CodeSniffer)
-and [PHPCS WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) to test
-for syntax errors, security vulnerabilities and some styling rules. We expect your commits to pass these tests.
+We expect all pull requests to pass linting and tests.
 
-In the theme you can run `./tests/test_phpcs.sh` or create a pull request to our repo and Github Actions CI will run the
-tests for you.
+### Testing
 
-If you are working on a plugin based off our starter plugin run `./includes/admin/tests/test_phpcs.sh`
+We use PHPUnit for testing. Please ensure that your changes include relevant tests and that all existing tests pass.
 
-You might need to run `composer install` first.
+```bash
+ddev composer test
+```
 
-Note: rules for PHPCS are located in the `phpcs.xml` file. We sometimes update the rule list as PHPCS updates. We’ll
-update the [starter plugin](https://github.com/thecodezone/dt-plugin) `phpcs.xml`, you might want to look there to get
-the latest version.
+### GitHub Workflow
 
-### GitHub and Commits
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Commit your changes.
+4. Create a pull request into the `main` branch.
 
-For new plugins copy our [starter plugin](https://github.com/thecodezone/dt-plugin).
+### Translations (if applicable)
 
-To commit to the theme or an existing plugin start by creating a fork of the repository. When you are ready, create a
-pull request into our repo.
+Any user-facing strings should be translatable using WordPress i18n functions:
 
-Note: Depending on your context you may wish to use an anonymous GitHub account.
+```php
+esc_html__( 'My String', 'wp-support' );
+```
 
-### `WP_DEBUG`
-
-Enable `WP_DEBUG` in your `wp-config.php`: `define('WP_DEBUG', true);`
-Checking out a PR and seeing the orange debug table is disappointing.
-
-We look forward to hearing from you!
+We look forward to your contributions!
